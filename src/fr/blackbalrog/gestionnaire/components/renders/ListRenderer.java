@@ -57,9 +57,9 @@ public class ListRenderer extends DefaultListCellRenderer
 
 	    if (index == this.hoveredIndex && !isSelected)
 	    {
-	        this.setForeground(new Color(88, 214, 141));
-	        this.setBackground(new Color(0, 0, 0, 0));
-	        this.setBorder(new EmptyBorder(5, 10, 0, 0));
+		    	this.setForeground(new Color(88, 214, 141));
+	        	this.setBackground(new Color(0, 0, 0, 0));
+	        	this.setBorder(new EmptyBorder(5, 10, 0, 0));
 	    }
 	    else if (isSelected)
 	    {
@@ -70,7 +70,7 @@ public class ListRenderer extends DefaultListCellRenderer
 	    }
 	    else
 	    {
-	    	this.setForeground(/*new Color(52, 73, 94)*/ new Color(93, 109, 126));
+	    		this.setForeground(/*new Color(52, 73, 94)*/ new Color(93, 109, 126));
 			this.setBackground(list.getBackground());
 			this.setBorder(new EmptyBorder(5, 5, 0, 0));
 	    }
