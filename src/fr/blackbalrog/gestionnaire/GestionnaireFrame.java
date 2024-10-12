@@ -27,7 +27,7 @@ public class GestionnaireFrame extends JFrame
 		this.generateDefaultDirectorysAndFiles();
 		//this.createDefautlUser();
 		
-		this.usersFiles 		= this.directoryUsers.listFiles();
+		this.usersFiles 			= this.directoryUsers.listFiles();
 		
 		this.setTitle("Gestionnaire des Comptes");
 		this.setSize(600, 400);
@@ -42,8 +42,8 @@ public class GestionnaireFrame extends JFrame
 	private void generateDefaultDirectorysAndFiles()
 	{
 		this.root 				= new File(System.getenv("APPDATA"), ".Gestionnaire");
-		this.directoryUsers 	= new File(root, "Utilisateurs");
-		this.defaultUser 		= new File(directoryUsers, "defaultUtilisateur.yml");
+		this.directoryUsers 			= new File(root, "Utilisateurs");
+		this.defaultUser 			= new File(directoryUsers, "defaultUtilisateur.yml");
 
 		this.generateDefaultDirs(root, directoryUsers);
 		System.out.println();
@@ -55,7 +55,7 @@ public class GestionnaireFrame extends JFrame
 	@SuppressWarnings("unused")
 	private void createDefautlUser()
 	{
-		YamlConfiguration configurationUsers = new YamlConfiguration(this.defaultUser);
+		YamlConfiguration configurationUsers 	= new YamlConfiguration(this.defaultUser);
 		
 		configurationUsers.set("pterodactyl.mail", "pterodactyl@mail.fr");
 		configurationUsers.set("pterodactyl.password", "pterodactyl");
@@ -100,7 +100,7 @@ public class GestionnaireFrame extends JFrame
 			{
 				dir.mkdirs();
 				System.out.println("Generation du dossier: " + dir.getAbsolutePath());
-	        }
+	        	}
 		}
 	}
 	
@@ -113,16 +113,16 @@ public class GestionnaireFrame extends JFrame
 			for (File file : files)
 			{
 				if (!file.exists())
-		        {
+		        	{
 					file.createNewFile();
 					System.out.println("Generation du fichier: " + file.getAbsolutePath());
-		        }
+		        	}
 			}
-        }
+        	}
 		catch (IOException exeption)
 		{
 			
-        }
+        	}
 	}
 	
 	public void refresh()
