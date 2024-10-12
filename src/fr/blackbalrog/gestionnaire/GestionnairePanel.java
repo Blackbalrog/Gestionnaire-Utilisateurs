@@ -30,7 +30,7 @@ import fr.blackbalrog.gestionnaire.panels.users.delete.FrameDeleteUser;
 public class GestionnairePanel extends JPanel implements ListSelectionListener, ActionListener
 {
 	
-	private File[] USERS_FILE 						= GestionnaireFrame.INSTANCE.getUsersFiles();
+	private File[] USERS_FILE 					= GestionnaireFrame.INSTANCE.getUsersFiles();
 	private DefaultListModel<String> listModel;
 	
 	private JLabel utilisateurs_label 				= new JLabel("Liste des utilisateurs");
@@ -59,15 +59,15 @@ public class GestionnairePanel extends JPanel implements ListSelectionListener, 
 		
 		if (this.USERS_FILE != null && this.USERS_FILE.length != 0)
 		{
-			this.listModel 		= new DefaultListModel<>();
+			this.listModel 			= new DefaultListModel<>();
 			for (File fileName : this.USERS_FILE)
 			{
 				this.listModel.addElement(fileName.getName().replace(".yml", ""));
 			}
 		}
 		
-		this.listRenderer 		= new ListRenderer();
-		this.list 				= new JList<>(this.listModel);
+		this.listRenderer 					= new ListRenderer();
+		this.list 						= new JList<>(this.listModel);
 		
 		this.list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
@@ -78,7 +78,7 @@ public class GestionnairePanel extends JPanel implements ListSelectionListener, 
 		this.list.setBackground(new Color(39, 55, 70));
 		//this.list.setPreferredSize(new Dimension(200, 100));
 		
-		JScrollPane scrollPane 	= new JScrollPane(this.list);
+		JScrollPane scrollPane 					= new JScrollPane(this.list);
 		this.add(scrollPane);
 		scrollPane.setBounds(0, 20, 180, 280);
 		scrollPane.setBorder(new MatteBorder(0, 0, 1, 1, new Color(93, 109, 126)));
