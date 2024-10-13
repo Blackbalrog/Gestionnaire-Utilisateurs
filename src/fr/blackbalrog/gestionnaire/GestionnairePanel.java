@@ -83,6 +83,7 @@ public class GestionnairePanel extends JPanel implements ListSelectionListener, 
 		this.delete_user_button.setBounds(70, 319, 100, 20);
 		this.setupButton(this.delete_user_button);
 
+		if (USERS_FILE.length == 0) return;
 		if (this.USERS_FILE != null && this.USERS_FILE.length != 0)
 		{
 			for (File fileName : this.USERS_FILE)
