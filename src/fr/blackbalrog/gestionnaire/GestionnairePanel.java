@@ -57,16 +57,8 @@ public class GestionnairePanel extends JPanel implements ListSelectionListener, 
 			));
 		this.utilisateurs_label.setForeground(new Color(93, 109, 126));
 		
-		if (this.USERS_FILE != null && this.USERS_FILE.length != 0)
-		{
-			this.listModel 			= new DefaultListModel<>();
-			for (File fileName : this.USERS_FILE)
-			{
-				this.listModel.addElement(fileName.getName().replace(".yml", ""));
-			}
-		}
-		
 		this.listRenderer 					= new ListRenderer();
+		this.listModel 						= new DefaultListModel<>();
 		this.list 						= new JList<>(this.listModel);
 		
 		this.list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -90,6 +82,14 @@ public class GestionnairePanel extends JPanel implements ListSelectionListener, 
 		this.add(this.delete_user_button);
 		this.delete_user_button.setBounds(70, 319, 100, 20);
 		this.setupButton(this.delete_user_button);
+
+		if (this.USERS_FILE != null && this.USERS_FILE.length != 0)
+		{
+			for (File fileName : this.USERS_FILE)
+			{
+				this.listModel.addElement(fileName.getName().replace(".yml", ""));
+			}
+		}
 	}
 
 	@Override
