@@ -1,12 +1,14 @@
 package fr.blackbalrog.gestionnaire;
 
 import java.io.File;
-import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-import fr.blackbalrog.gestionnaire.yaml.YamlConfiguration;
+import fr.blackbalrog.gestionnaire.managers.LecteurManager;
+import fr.blackbalrog.gestionnaire.panels.installation.FrameInstallation;
+import fr.blackbalrog.gestionnaire.usb.Lecteur;
+import fr.blackbalrog.gestionnaire.utils.Debug;
 
 @SuppressWarnings("serial")
 public class GestionnaireFrame extends JFrame
@@ -14,54 +16,86 @@ public class GestionnaireFrame extends JFrame
 	public static GestionnaireFrame INSTANCE;
 	public GestionnairePanel panel;
 	
+	private File lecteur;
+	
 	private File root;
 	private File directoryUsers;
 	private File[] usersFiles;
 	
-	private File defaultUser;
-	
 	public GestionnaireFrame()
 	{
-		INSTANCE 				= this;
+		INSTANCE 					= this;
 		
-		this.generateDefaultDirectorysAndFiles();
-		//this.createDefautlUser();
+		Debug.setEnable(false);
 		
-		this.usersFiles 		= this.directoryUsers.listFiles();
-		
-		this.setTitle("Gestionnaire des Comptes");
-		this.setSize(600, 400);
-		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		this.setUndecorated(false);
-		this.setLocationRelativeTo(null);
-		this.setContentPane(this.panel = new GestionnairePanel());
-		
-		this.setVisible(true);
+		if (LecteurManager.getLecteur() == null)
+		{
+			FrameInstallation.main();
+		}
+		else
+		{
+			Lecteur.search();
+			
+			this.generateDefaultDirectorysAndFiles();
+			
+			this.usersFiles 			= this.directoryUsers.listFiles();
+			
+			this.setTitle("Gestionnaire des Comptes");
+			this.setSize(600, 400);
+			this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+			this.setUndecorated(false);
+			this.setLocationRelativeTo(null);
+			this.setContentPane(this.panel = new GestionnairePanel());
+			
+			this.setVisible(true);
+			
+			Thread thread = new Thread(new Runnable()
+			{
+	            @Override
+	            public void run()
+	            {
+	                while (true)
+	                {
+	                	if (Lecteur.getLecteur() == null) return;
+	                	
+	                	if (!Lecteur.getLecteur().exists())
+	    				{
+	    					System.exit(0);
+	    				}
+	                    try
+	                    {
+	                        Thread.sleep(100);
+	                    }
+	                    catch (InterruptedException exception)
+	                    {
+	                        System.out.println("Le thread a été interrompu.");
+	                    }
+	                }
+	            }
+	        });
+			thread.start();
+		}
 	}
-	
+
 	private void generateDefaultDirectorysAndFiles()
 	{
-		this.root 				= new File(System.getenv("APPDATA"), ".Gestionnaire");
-		this.directoryUsers 	= new File(root, "Utilisateurs");
-		this.defaultUser 		= new File(directoryUsers, "defaultUtilisateur.yml");
-
-		this.generateDefaultDirs(root, directoryUsers);
-		System.out.println();
-		//this.generateDefaultFiles(defaultUser);
-		System.out.println();
-		System.out.println();
-	}
+		
+		if (Debug.isEnable())
+		{
+			this.root 				= new File(System.getenv("APPDATA"), ".Gestionnaire");
+			this.directoryUsers 	= new File(root, "Utilisateurs");
 	
-	@SuppressWarnings("unused")
-	private void createDefautlUser()
-	{
-		YamlConfiguration configurationUsers = new YamlConfiguration(this.defaultUser);
+			this.generateDefaultDirs(root, directoryUsers);
+		}
+		else
+		{
+			this.root 				= new File(Lecteur.getLecteur(), ".Gestionnaire");
+			this.directoryUsers 	= new File(root, "Utilisateurs");
+			
+			this.generateDefaultDirs(root, directoryUsers);
+		}
 		
-		configurationUsers.set("pterodactyl.mail", "pterodactyl@mail.fr");
-		configurationUsers.set("pterodactyl.password", "pterodactyl");
-		
-		configurationUsers.set("rise.mail", "rise@mail.fr");
-		configurationUsers.set("rise.password", "rise");
+		System.out.println();
 	}
 	
 	public static void main(String[] args)
@@ -104,25 +138,9 @@ public class GestionnaireFrame extends JFrame
 		}
 	}
 	
-	@SuppressWarnings("unused")
-	private void generateDefaultFiles(File... files)
+	public File getLecteur()
 	{
-		try
-		{
-			System.out.println("Generation des fichiers par default:");
-			for (File file : files)
-			{
-				if (!file.exists())
-		        {
-					file.createNewFile();
-					System.out.println("Generation du fichier: " + file.getAbsolutePath());
-		        }
-			}
-        }
-		catch (IOException exeption)
-		{
-			
-        }
+		return this.lecteur;
 	}
 	
 	public void refresh()

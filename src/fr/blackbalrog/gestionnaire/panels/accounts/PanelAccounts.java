@@ -21,6 +21,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
 
+import fr.blackbalrog.gestionnaire.color.BaseColor;
 import fr.blackbalrog.gestionnaire.components.ui.CustomScrollBarUI;
 import fr.blackbalrog.gestionnaire.files.FileConfiguration;
 import fr.blackbalrog.gestionnaire.utils.Utils;
@@ -42,7 +43,7 @@ public class PanelAccounts extends JScrollPane
 	{
 		super();
 		
-		this.setBackground(new Color(39, 55, 70));
+		this.setBackground(BaseColor.background);
 		
 		this.contentPanel.setLayout(null);
 		this.contentPanel.setBackground(new Color(39, 55, 70));
@@ -78,7 +79,7 @@ public class PanelAccounts extends JScrollPane
 			
 			JLabel accountLabel 						= new JLabel(key + ":");
 			accountLabel.setBounds(10, y, 200, 20);
-			accountLabel.setForeground(new Color(88, 214, 141));
+			accountLabel.setForeground(BaseColor.green);
 			this.contentPanel.add(accountLabel);
 			
 			/*-------------------------------------*/
@@ -107,7 +108,7 @@ public class PanelAccounts extends JScrollPane
 
 			JLabel passwordLabel 						= new JLabel("Mot de passe: ");
 			passwordLabel.setBounds(10, y, 100, 20);
-			passwordLabel.setForeground(new Color(88, 214, 141));
+			passwordLabel.setForeground(BaseColor.green);
 			this.contentPanel.add(passwordLabel);
 
 			/*----------------*/
@@ -125,7 +126,7 @@ public class PanelAccounts extends JScrollPane
 			
 			JButton generate_password_button 			= new JButton("<html><u>generer</u></html>");
 			generate_password_button.setBounds(185, y +3, 60, 20);
-			this.setupButton(generate_password_button, new Color(247, 220, 111));
+			this.setupButton(generate_password_button, BaseColor.yellow);
 			this.contentPanel.add(generate_password_button);
 			generate_password_button.setVisible(false);
 			generate_password_button.addActionListener(new ActionListener()
@@ -147,7 +148,7 @@ public class PanelAccounts extends JScrollPane
 			
 			JButton copy_button 						= new JButton("<html><u>copier</u></html");
 			copy_button.setBounds(-1, y, 60, 20);
-			this.setupButton(copy_button, new Color(88, 214, 141));
+			this.setupButton(copy_button, BaseColor.green);
 			this.contentPanel.add(copy_button);
 			copy_button.addActionListener(new ActionListener()
 			{
@@ -171,7 +172,7 @@ public class PanelAccounts extends JScrollPane
 			                {
 			                    i++;
 			                    copy_button.setText("copier");
-			                    copy_button.setForeground(new Color(247, 235, 111));
+			                    copy_button.setForeground(BaseColor.yellow);
 			                    try
 			                    {
 			                        Thread.sleep(100);
@@ -184,7 +185,7 @@ public class PanelAccounts extends JScrollPane
 			                    if (i == 5)
 				                {
 				                	copy_button.setText("<html><u>copier</u></html>");
-				                	copy_button.setForeground(new Color(88, 214, 141));
+				                	copy_button.setForeground(BaseColor.green);
 				                }
 			                }
 			            }
@@ -207,11 +208,11 @@ public class PanelAccounts extends JScrollPane
 	private void setupField(JTextField field)
 	{
 		field.setEditable(false);
-		field.setForeground(new Color(88, 214, 141));
+		field.setForeground(BaseColor.green);
 		field.setOpaque(false);
-		field.setBorder(new MatteBorder(0, 0, 1, 0, new Color(88, 214, 141)));
+		field.setBorder(new MatteBorder(0, 0, 1, 0, BaseColor.green));
 		field.setSelectionColor(new Color(0, 0, 0, 0));
-		field.setSelectedTextColor(new Color(88, 214, 141));
+		field.setSelectedTextColor(BaseColor.green);
 	}
 
 	private void setupButton(JButton button, Color color)

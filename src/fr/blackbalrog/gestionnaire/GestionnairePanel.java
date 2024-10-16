@@ -57,32 +57,6 @@ public class GestionnairePanel extends JPanel implements ListSelectionListener, 
 			));
 		this.utilisateurs_label.setForeground(new Color(93, 109, 126));
 		
-		if (this.USERS_FILE != null && this.USERS_FILE.length != 0)
-		{
-			this.listModel 		= new DefaultListModel<>();
-			for (File fileName : this.USERS_FILE)
-			{
-				this.listModel.addElement(fileName.getName().replace(".yml", ""));
-			}
-		}
-		
-		this.listRenderer 		= new ListRenderer();
-		this.list 				= new JList<>(this.listModel);
-		
-		this.list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		this.list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-		this.list.setVisibleRowCount(-1);
-		this.list.setCellRenderer(this.listRenderer);
-		this.listRenderer.setHover(this.list);
-		this.list.addListSelectionListener(this);
-		this.list.setBackground(new Color(39, 55, 70));
-		//this.list.setPreferredSize(new Dimension(200, 100));
-		
-		JScrollPane scrollPane 	= new JScrollPane(this.list);
-		this.add(scrollPane);
-		scrollPane.setBounds(0, 20, 180, 280);
-		scrollPane.setBorder(new MatteBorder(0, 0, 1, 1, new Color(93, 109, 126)));
-		
 		this.add(this.create_user_button);
 		this.create_user_button.setBounds(20, 319, 60, 20);
 		this.setupButton(this.create_user_button);
@@ -90,6 +64,33 @@ public class GestionnairePanel extends JPanel implements ListSelectionListener, 
 		this.add(this.delete_user_button);
 		this.delete_user_button.setBounds(70, 319, 100, 20);
 		this.setupButton(this.delete_user_button);
+		
+		this.listRenderer 		= new ListRenderer();
+		this.listModel 			= new DefaultListModel<>();
+		this.list 				= new JList<>(this.listModel);
+		
+		this.list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		this.list.setLayoutOrientation(JList.VERTICAL_WRAP);
+		this.list.setVisibleRowCount(-1);
+		this.list.setCellRenderer(this.listRenderer);
+		this.listRenderer.setHover(this.list);
+		this.list.addListSelectionListener(this);
+		this.list.setBackground(new Color(39, 55, 70));
+		
+		JScrollPane scrollPane 	= new JScrollPane(this.list);
+		this.add(scrollPane);
+		scrollPane.setBounds(0, 20, 180, 280);
+		scrollPane.setBorder(new MatteBorder(0, 0, 1, 1, new Color(93, 109, 126)));
+		
+		if (USERS_FILE.length == 0) return;
+		
+		if (this.USERS_FILE != null && this.USERS_FILE.length != 0)
+		{
+			for (File fileName : this.USERS_FILE)
+			{
+				this.listModel.addElement(fileName.getName().replace(".yml", ""));
+			}
+		}
 	}
 
 	@Override

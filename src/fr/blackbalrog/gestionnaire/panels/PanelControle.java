@@ -21,7 +21,7 @@ public class PanelControle extends JPanel
 		
 		this.panelAccount 						= new PanelAccounts();
 		this.add(this.panelAccount);
-		this.panelAccount.setBounds(0, 10, 385, 300);
+		this.panelAccount.setBounds(0, 10, 385, 290);
 		
 		this.panelControleActions 				= new PanelControleActions();
 		this.add(this.panelControleActions);
