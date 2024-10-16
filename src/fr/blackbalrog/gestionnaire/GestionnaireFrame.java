@@ -28,7 +28,6 @@ public class GestionnaireFrame extends JFrame
 		
 		Debug.setEnable(false);
 		
-<<<<<<< HEAD
 		if (LecteurManager.getLecteur() == null)
 		{
 			FrameInstallation.main();
@@ -76,23 +75,10 @@ public class GestionnaireFrame extends JFrame
 	        });
 			thread.start();
 		}
-=======
-		this.usersFiles 			= this.directoryUsers.listFiles();
-		
-		this.setTitle("Gestionnaire des Comptes");
-		this.setSize(600, 400);
-		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		this.setUndecorated(false);
-		this.setLocationRelativeTo(null);
-		this.setContentPane(this.panel = new GestionnairePanel());
-		
-		this.setVisible(true);
->>>>>>> fb11cdb932f6a7c32ae16abc1e456373b4c91a07
 	}
 
 	private void generateDefaultDirectorysAndFiles()
 	{
-<<<<<<< HEAD
 		
 		if (Debug.isEnable())
 		{
@@ -108,23 +94,6 @@ public class GestionnaireFrame extends JFrame
 			
 			this.generateDefaultDirs(root, directoryUsers);
 		}
-=======
-		this.root 				= new File(System.getenv("APPDATA"), ".Gestionnaire");
-		this.directoryUsers 			= new File(root, "Utilisateurs");
-		this.defaultUser 			= new File(directoryUsers, "defaultUtilisateur.yml");
-
-		this.generateDefaultDirs(root, directoryUsers);
-		System.out.println();
-		//this.generateDefaultFiles(defaultUser);
-		System.out.println();
-		System.out.println();
-	}
-	
-	@SuppressWarnings("unused")
-	private void createDefautlUser()
-	{
-		YamlConfiguration configurationUsers 	= new YamlConfiguration(this.defaultUser);
->>>>>>> fb11cdb932f6a7c32ae16abc1e456373b4c91a07
 		
 		System.out.println();
 	}
@@ -165,32 +134,13 @@ public class GestionnaireFrame extends JFrame
 			{
 				dir.mkdirs();
 				System.out.println("Generation du dossier: " + dir.getAbsolutePath());
-	        	}
+	        }
 		}
 	}
 	
 	public File getLecteur()
 	{
-<<<<<<< HEAD
 		return this.lecteur;
-=======
-		try
-		{
-			System.out.println("Generation des fichiers par default:");
-			for (File file : files)
-			{
-				if (!file.exists())
-		        	{
-					file.createNewFile();
-					System.out.println("Generation du fichier: " + file.getAbsolutePath());
-		        	}
-			}
-        	}
-		catch (IOException exeption)
-		{
-			
-        	}
->>>>>>> fb11cdb932f6a7c32ae16abc1e456373b4c91a07
 	}
 	
 	public void refresh()

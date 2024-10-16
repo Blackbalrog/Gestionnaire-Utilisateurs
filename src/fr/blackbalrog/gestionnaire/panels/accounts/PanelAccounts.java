@@ -32,12 +32,12 @@ import fr.blackbalrog.gestionnaire.yaml.YamlConfiguration;
 public class PanelAccounts extends JScrollPane
 {
 	
-	private Map<String, JTextField> mailFields 					= new HashMap<>();
-	private Map<String, JTextField> passwordFields 					= new HashMap<>();
-	private List<JTextField> listFields 						= new ArrayList<>();
-	private List<JButton> listButtons 						= new ArrayList<>();
+	private Map<String, JTextField> mailFields 			= new HashMap<>();
+	private Map<String, JTextField> passwordFields 		= new HashMap<>();
+	private List<JTextField> listFields 				= new ArrayList<>();
+	private List<JButton> listButtons 					= new ArrayList<>();
 
-	private JPanel contentPanel 							= new JPanel();
+	private JPanel contentPanel 						= new JPanel();
 	
 	public PanelAccounts()
 	{
@@ -65,15 +65,15 @@ public class PanelAccounts extends JScrollPane
 	{
 		this.contentPanel.removeAll();
 		
-		YamlConfiguration configurationUser 					= new YamlConfiguration(FileConfiguration.getFileUser());
+		YamlConfiguration configurationUser 			= new YamlConfiguration(FileConfiguration.getFileUser());
 
 		int y = 10;
 
 		for (String key : configurationUser.getKeys(false))
 		{
-			ConfigurationSection section 					= configurationUser.getConfigurationSection(key);
-			String mail 							= section.getString("mail");
-			String password 						= section.getString("password");
+			ConfigurationSection section 				= configurationUser.getConfigurationSection(key);
+			String mail 								= section.getString("mail");
+			String password 							= section.getString("password");
 
 			/*----------------*/
 			
@@ -86,7 +86,7 @@ public class PanelAccounts extends JScrollPane
 			
 			y += 20;
 			
-			JLabel mailLabel 						= new JLabel("mail: ");
+			JLabel mailLabel 							= new JLabel("mail: ");
 			mailLabel.setBounds(10, y, 50, 20);
 			mailLabel.setForeground(new Color(88, 214, 141));
 			this.contentPanel.add(mailLabel);
@@ -124,7 +124,7 @@ public class PanelAccounts extends JScrollPane
 			
 			/*----------------*/
 			
-			JButton generate_password_button 				= new JButton("<html><u>generer</u></html>");
+			JButton generate_password_button 			= new JButton("<html><u>generer</u></html>");
 			generate_password_button.setBounds(185, y +3, 60, 20);
 			this.setupButton(generate_password_button, BaseColor.yellow);
 			this.contentPanel.add(generate_password_button);
@@ -155,7 +155,7 @@ public class PanelAccounts extends JScrollPane
 				@Override
 				public void actionPerformed(ActionEvent event)
 				{
-					String toCopy 					= "Mail: " + mail + "\nMot de passe: " + passwordField.getText();
+					String toCopy 						= "Mail: " + mail + "\nMot de passe: " + passwordField.getText();
 					StringSelection selection 			= new StringSelection(toCopy);
 					Clipboard clipboard 				= Toolkit.getDefaultToolkit().getSystemClipboard();
 					clipboard.setContents(selection, null);
@@ -163,9 +163,8 @@ public class PanelAccounts extends JScrollPane
 					
 					Thread thread = new Thread(new Runnable()
 					{
-			            		int i = 0;
+			            int i = 0;
 
-<<<<<<< HEAD
 			            @Override
 			            public void run()
 			            {
@@ -191,33 +190,6 @@ public class PanelAccounts extends JScrollPane
 			                }
 			            }
 			        });
-=======
-			            		@Override
-			            		public void run()
-			            		{
-			                		while (i < 5)
-			                		{
-			                    			i++;
-			                    			copy_button.setText("copier");
-			                    			copy_button.setForeground(new Color(247, 235, 111));
-			                    			try
-			                    			{
-			                        			Thread.sleep(100);
-			                    			}
-			                    			catch (InterruptedException exception)
-			                    			{
-			                        			System.out.println("Le thread a été interrompu.");
-			                    			}
-			                    
-								if (i == 5)
-				        			{
-				                			copy_button.setText("<html><u>copier</u></html>");
-				                			copy_button.setForeground(new Color(88, 214, 141));
-				                		}
-			               			}
-			            		}
-			        	});
->>>>>>> fb11cdb932f6a7c32ae16abc1e456373b4c91a07
 					thread.start();
 				}
 			});

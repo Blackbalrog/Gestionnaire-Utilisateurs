@@ -27,7 +27,7 @@ public class PanelControleActions extends JPanel implements ActionListener
 	private JButton button_create_account;
 	
 	private JButton button_edit;
-	private boolean etat_button 						= false;
+	private boolean etat_button 				= false;
 	
 	private JButton button_delete;
 	
@@ -37,20 +37,20 @@ public class PanelControleActions extends JPanel implements ActionListener
 		this.setBackground(new Color(39, 55, 70));
 		this.setBorder(new MatteBorder(1, 0, 0, 0, new Color(93, 109, 126)));
 		
-		this.button_create_account 					= new JButton("<html><u>Ajouter</u></html>");
-        	this.add(this.button_create_account);
-        	this.button_create_account.setBounds(0, 20, 60, 20);
-        	this.setupButton(this.button_create_account);
+		this.button_create_account 				= new JButton("<html><u>Ajouter</u></html>");
+        this.add(this.button_create_account);
+        this.button_create_account.setBounds(0, 20, 60, 20);
+        this.setupButton(this.button_create_account);
 		
 		this.button_edit 						= new JButton("<html><u>Modifier</u></html>");
-        	this.add(this.button_edit);
-        	this.button_edit.setBounds(60, 20, 70, 20);
-        	this.setupButton(this.button_edit);
+        this.add(this.button_edit);
+        this.button_edit.setBounds(60, 20, 70, 20);
+        this.setupButton(this.button_edit);
         
-        	this.button_delete 						= new JButton("<html><u>Supprimer</u></html>");
-        	this.add(this.button_delete);
-        	this.button_delete.setBounds(130, 20, 70, 20);
-        	this.setupButton(this.button_delete);
+        this.button_delete 						= new JButton("<html><u>Supprimer</u></html>");
+        this.add(this.button_delete);
+        this.button_delete.setBounds(130, 20, 70, 20);
+        this.setupButton(this.button_delete);
 	}
 	
 	@Override
@@ -63,9 +63,9 @@ public class PanelControleActions extends JPanel implements ActionListener
 			return;
 		}
 		
-		PanelAccounts panelAccounts 					= Instances.getPanelControle().getPanelAccounts();
+		PanelAccounts panelAccounts 			= Instances.getPanelControle().getPanelAccounts();
 		
-		YamlConfiguration configurationUser 				= new YamlConfiguration(userFile);
+		YamlConfiguration configurationUser 	= new YamlConfiguration(userFile);
 		
 		if (event.getSource() == this.button_create_account)
 		{
@@ -78,10 +78,10 @@ public class PanelControleActions extends JPanel implements ActionListener
 			this.etat_button = !this.etat_button;
 			this.button_edit.setText(this.etat_button ? this.editText("Valider") : this.editText("Modifier"));
 			
-			List<JTextField> listFields 				= panelAccounts.getListFields();
+			List<JTextField> listFields 			= panelAccounts.getListFields();
 			List<JButton> listButtons				= panelAccounts.getListButtons();
-            		Map<String, JTextField> mailFields 			= panelAccounts.getMailFields();
-            		Map<String, JTextField> passwordFields 			= panelAccounts.getPasswordFields();
+            Map<String, JTextField> mailFields 		= panelAccounts.getMailFields();
+            Map<String, JTextField> passwordFields 	= panelAccounts.getPasswordFields();
 			
 			if (this.etat_button == true)
 			{
@@ -107,13 +107,13 @@ public class PanelControleActions extends JPanel implements ActionListener
 					fields.setCaretColor(Color.black);
 				}
 		        
-		        	for (String key : mailFields.keySet())
-		        	{
-                    			configurationUser.set(key + ".mail", mailFields.get(key).getText());
-                    			configurationUser.set(key + ".password", passwordFields.get(key).getText());
-                		}
+		        for (String key : mailFields.keySet())
+		        {
+                    configurationUser.set(key + ".mail", mailFields.get(key).getText());
+                    configurationUser.set(key + ".password", passwordFields.get(key).getText());
+                }
 		        
-		        	for (JButton buttons : listButtons)
+		        for (JButton buttons : listButtons)
 				{
 					buttons.setVisible(false);
 				}

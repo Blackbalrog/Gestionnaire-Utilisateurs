@@ -20,19 +20,19 @@ import fr.blackbalrog.gestionnaire.yaml.YamlConfiguration;
 public class PanelCreateAccount extends JPanel implements ActionListener
 {
 	
-	private JLabel information_label 				= new JLabel("<html><u>Création de compte</u></html>");
+	private JLabel information_label 			= new JLabel("<html><u>Création de compte</u></html>");
 	
-	private JLabel account_label 					= new JLabel("Compte:");
-	private JTextField account_field				= new JTextField();
+	private JLabel account_label 				= new JLabel("Compte:");
+	private JTextField account_field			= new JTextField();
 	
 	private JLabel mail_label 					= new JLabel("Mail:");
-	private JTextField mail_field 					= new JTextField();
+	private JTextField mail_field 				= new JTextField();
 	
-	private JLabel password_label 					= new JLabel("Password:");
-	private JTextField password_field 				= new JTextField();
-	private JButton generate_password_button 			= new JButton("<html><u>Generer</u></html>");
+	private JLabel password_label 				= new JLabel("Password:");
+	private JTextField password_field 			= new JTextField();
+	private JButton generate_password_button 	= new JButton("<html><u>Generer</u></html>");
 	
-	private JButton validate_button 				= new JButton("<html><u>Valider</u></html>");
+	private JButton validate_button 			= new JButton("<html><u>Valider</u></html>");
 	
 	public PanelCreateAccount()
 	{
