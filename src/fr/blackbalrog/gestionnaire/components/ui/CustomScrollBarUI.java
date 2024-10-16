@@ -8,8 +8,8 @@ public class CustomScrollBarUI extends BasicScrollBarUI
 {
 
 	// Couleurs personnalisées pour le pouce et le track
-	private Color thumbColor 		= new Color(93, 109, 126); // Rouge
-	private Color trackColor 		= new Color(39, 55, 70); // Couleur de fond du track
+	private Color thumbColor 			= new Color(93, 109, 126); // Rouge
+	private Color trackColor 			= new Color(39, 55, 70); // Couleur de fond du track
 
 	public CustomScrollBarUI()
 	{

@@ -21,7 +21,7 @@ public class PanelDeleteUser extends JPanel implements ActionListener
 {
 	
 	private JLabel utilisateur_label 			= new JLabel("<html><u>Utilisateur:</u></html>");
-	private JTextField utilisateur_field 		= new JTextField();
+	private JTextField utilisateur_field 			= new JTextField();
 	
 	private JButton validate_button 			= new JButton("<html><u>Supprimer</u></html>");
 	

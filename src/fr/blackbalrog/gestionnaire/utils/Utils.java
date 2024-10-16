@@ -6,15 +6,15 @@ public class Utils
 {
 	public static String generateRandomPassword()
 	{
-		int longueur 				= 15;
-		StringBuilder chaine 		= new StringBuilder();
-		Random rand 				= new Random();
+		int longueur 					= 15;
+		StringBuilder chaine 				= new StringBuilder();
+		Random rand 					= new Random();
 		
-		String caracteresSpeciaux 	= "!@#$%^&*()-_=+[]{}|;:,.<>?";
+		String caracteresSpeciaux 			= "!@#$%^&*()-_=+[]{}|;:,.<>?";
 		
 		for (int i = 0; i < longueur; i++)
 		{
-			int typeDeCaractere 	= rand.nextInt(4);
+			int typeDeCaractere 			= rand.nextInt(4);
 			char caractere = ' ';
 			
 			switch (typeDeCaractere)

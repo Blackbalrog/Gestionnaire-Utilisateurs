@@ -19,7 +19,7 @@ public class PanelControle extends JPanel
 		this.setLayout(null);
 		this.setBackground(new Color(39, 55, 70));
 		
-		this.panelAccount 						= new PanelAccounts();
+		this.panelAccount 					= new PanelAccounts();
 		this.add(this.panelAccount);
 		this.panelAccount.setBounds(0, 10, 385, 290);
 		
