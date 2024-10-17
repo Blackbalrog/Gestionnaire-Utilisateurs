@@ -1,7 +1,6 @@
 package fr.blackbalrog.gestionnaire;
 
 import java.awt.Color;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -19,6 +18,7 @@ import javax.swing.border.MatteBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import fr.blackbalrog.gestionnaire.components.button.Button;
 import fr.blackbalrog.gestionnaire.components.renders.ListRenderer;
 import fr.blackbalrog.gestionnaire.instances.Instances;
 import fr.blackbalrog.gestionnaire.managers.UserManager;
@@ -37,8 +37,8 @@ public class GestionnairePanel extends JPanel implements ListSelectionListener, 
 	private ListRenderer listRenderer;
 	private JList<String> list;
 	
-	private JButton create_user_button 				= new JButton("<html><u>nouveau</u></html>");
-	private JButton delete_user_button 				= new JButton("<html><u>supprimer</u></html>");
+	private Button create_user_button 				= new Button("Nouveau");
+	private Button delete_user_button 				= new Button("Supprimer");
 	
 	private PanelControle panelControle;
 	
@@ -59,11 +59,15 @@ public class GestionnairePanel extends JPanel implements ListSelectionListener, 
 		
 		this.add(this.create_user_button);
 		this.create_user_button.setBounds(20, 319, 60, 20);
-		this.setupButton(this.create_user_button);
+		this.create_user_button.setColorHover();
+		this.create_user_button.setColorClick();
+		this.create_user_button.addActionListener(this);
 		
 		this.add(this.delete_user_button);
 		this.delete_user_button.setBounds(70, 319, 100, 20);
-		this.setupButton(this.delete_user_button);
+		this.delete_user_button.setColorHover();
+		this.delete_user_button.setColorClick();
+		this.delete_user_button.addActionListener(this);
 		
 		this.listRenderer 		= new ListRenderer();
 		this.listModel 			= new DefaultListModel<>();
@@ -129,17 +133,6 @@ public class GestionnairePanel extends JPanel implements ListSelectionListener, 
 			FrameDeleteUser.main();
 			this.delete_user_button.setEnabled(false);
 		}
-	}
-	
-	private void setupButton(JButton button)
-	{
-		button.setBackground(new Color(0, 0, 0, 0));
-		button.setForeground(new Color(88, 214, 141));
-		button.setBorderPainted(false);
-		button.setContentAreaFilled(false);
-		button.setFocusPainted(false);
-		button.setMargin(new Insets(0, 0, 0, 0));
-		button.addActionListener(this);
 	}
 	
 	public PanelControle getPanelControle()

@@ -1,7 +1,6 @@
 package fr.blackbalrog.gestionnaire.panels.accounts;
 
 import java.awt.Color;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -14,6 +13,8 @@ import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
 
 import fr.blackbalrog.gestionnaire.GestionnaireFrame;
+import fr.blackbalrog.gestionnaire.components.button.Button;
+import fr.blackbalrog.gestionnaire.components.label.LabelError;
 import fr.blackbalrog.gestionnaire.instances.Instances;
 import fr.blackbalrog.gestionnaire.managers.UserManager;
 import fr.blackbalrog.gestionnaire.panels.accounts.create.FrameCreateAccount;
@@ -24,12 +25,14 @@ import fr.blackbalrog.gestionnaire.yaml.YamlConfiguration;
 public class PanelControleActions extends JPanel implements ActionListener
 {
 	
-	private JButton button_create_account;
+	private Button button_create_account;
 	
-	private JButton button_edit;
+	private Button button_edit;
 	private boolean etat_button 				= false;
 	
-	private JButton button_delete;
+	private Button button_delete;
+	
+	private LabelError error_label;
 	
 	public PanelControleActions()
 	{
@@ -37,20 +40,30 @@ public class PanelControleActions extends JPanel implements ActionListener
 		this.setBackground(new Color(39, 55, 70));
 		this.setBorder(new MatteBorder(1, 0, 0, 0, new Color(93, 109, 126)));
 		
-		this.button_create_account 				= new JButton("<html><u>Ajouter</u></html>");
+		this.button_create_account 				= new Button("Ajouter");
         this.add(this.button_create_account);
         this.button_create_account.setBounds(0, 20, 60, 20);
-        this.setupButton(this.button_create_account);
+        this.button_create_account.setColorHover();
+        this.button_create_account.setColorClick();
+        this.button_create_account.addActionListener(this);
 		
-		this.button_edit 						= new JButton("<html><u>Modifier</u></html>");
+		this.button_edit 						= new Button("Modifier");
         this.add(this.button_edit);
         this.button_edit.setBounds(60, 20, 70, 20);
-        this.setupButton(this.button_edit);
+        this.button_edit.setColorHover();
+        this.button_edit.setColorClick();
+        this.button_edit.addActionListener(this);
         
-        this.button_delete 						= new JButton("<html><u>Supprimer</u></html>");
+        this.button_delete 						= new Button("Supprimer");
         this.add(this.button_delete);
         this.button_delete.setBounds(130, 20, 70, 20);
-        this.setupButton(this.button_delete);
+        this.button_delete.setColorHover();
+        this.button_delete.setColorClick();
+        this.button_delete.addActionListener(this);
+        
+        this.error_label 						= new LabelError();
+        this.add(this.error_label);
+        this.error_label.setBounds(0, 35, 300, 20);
 	}
 	
 	@Override
@@ -59,6 +72,7 @@ public class PanelControleActions extends JPanel implements ActionListener
 		File userFile 							= new File(GestionnaireFrame.INSTANCE.getUsersDirectory(), UserManager.getUsername() + ".yml");
 		if (!userFile.exists())
 		{
+			this.error_label.setErrorMessage("Le fichier de " + UserManager.getUsername() + " n'a pas pu être charger correctement");
 			System.out.println("Le fichier de " + UserManager.getUsername() + " n'a pas pu être charger correctement");
 			return;
 		}
@@ -151,15 +165,4 @@ public class PanelControleActions extends JPanel implements ActionListener
 	{
 		return "<html><u>" + text + "</u></html>";
 	}
-	
-	private void setupButton(JButton button)
-	{
-        button.setBackground(new Color(0, 0, 0, 0));
-        button.setForeground(new Color(88, 214, 141));
-        button.setBorderPainted(false);
-        button.setContentAreaFilled(false);
-        button.setFocusPainted(false);
-        button.setMargin(new Insets(0, 0, 0, 0));
-        button.addActionListener(this);
-    }
 }

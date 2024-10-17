@@ -1,16 +1,17 @@
 package fr.blackbalrog.gestionnaire.panels.accounts.create;
 
 import java.awt.Color;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
 
+import fr.blackbalrog.gestionnaire.color.ColorComponent;
+import fr.blackbalrog.gestionnaire.components.button.Button;
+import fr.blackbalrog.gestionnaire.components.label.LabelError;
 import fr.blackbalrog.gestionnaire.files.FileConfiguration;
 import fr.blackbalrog.gestionnaire.instances.Instances;
 import fr.blackbalrog.gestionnaire.utils.Utils;
@@ -30,9 +31,11 @@ public class PanelCreateAccount extends JPanel implements ActionListener
 	
 	private JLabel password_label 				= new JLabel("Password:");
 	private JTextField password_field 			= new JTextField();
-	private JButton generate_password_button 	= new JButton("<html><u>Generer</u></html>");
+	private Button generate_password_button 	= new Button("Generer");
 	
-	private JButton validate_button 			= new JButton("<html><u>Valider</u></html>");
+	private Button validate_button 				= new Button("Valider");
+	
+	private LabelError error_label 				= new LabelError();
 	
 	public PanelCreateAccount()
 	{
@@ -78,15 +81,21 @@ public class PanelCreateAccount extends JPanel implements ActionListener
 		
 		this.add(this.generate_password_button);
 		this.generate_password_button.setBounds(x + 150 + 65, y +3, 60, 20);
-		this.setupButton(this.generate_password_button);
-		
+		this.generate_password_button.setForeground(ColorComponent.clicked_button);
+		this.generate_password_button.addActionListener(this);
 		
 		y = y + 40;
+		
+		this.add(this.error_label);
+		this.error_label.setBounds(x, y, 300, 20);
+		
 		x = x + 300;
 		
 		this.add(this.validate_button);
+		this.validate_button.setColorHover();
+		this.validate_button.setColorClick();
 		this.validate_button.setBounds(x, y, 60, 20);
-		this.setupButton(this.validate_button);
+		this.validate_button.addActionListener(this);
 	}
 
 	@Override
@@ -101,6 +110,7 @@ public class PanelCreateAccount extends JPanel implements ActionListener
 		{
 			if (this.account_field.getText().isEmpty() || this.mail_field.getText().isEmpty() || this.password_field.getText().isEmpty())
 			{
+				this.error_label.setErrorMessage("Veuillez remplir tous les champs de texte");
 				System.out.println("Veuillez remplir tous les champs de texte");
 				return;
 			}
@@ -109,6 +119,7 @@ public class PanelCreateAccount extends JPanel implements ActionListener
 			
 			if (configurationUser.contains(this.account_field.getText()))
 			{
+				this.error_label.setErrorMessage("Cette clée éxiste déjà");
 				System.out.println("Cette clée éxiste déjà");
 				return;
 			}
@@ -131,17 +142,6 @@ public class PanelCreateAccount extends JPanel implements ActionListener
 		textField.setSelectionColor(new Color(0, 0, 0, 0));
 		textField.setCaretColor(Color.gray);
 		textField.setSelectionColor(Color.gray);
-	}
-	
-	private void setupButton(JButton button)
-	{
-		button.setBackground(new Color(0, 0, 0, 0));
-		button.setForeground(new Color(88, 214, 141));
-		button.setBorderPainted(false);
-		button.setContentAreaFilled(false);
-		button.setFocusPainted(false);
-		button.setMargin(new Insets(0, 0, 0, 0));
-		button.addActionListener(this);
 	}
 	
 	private void setupLabel(JLabel label)
